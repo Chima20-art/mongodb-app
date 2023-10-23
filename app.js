@@ -34,9 +34,9 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
-// app.get("/", (req, res) => {
-//   res.send("Welcome to my MongoDB app!");
-// });
+app.get("/", (req, res) => {
+  res.send("Welcome to my MongoDB app!");
+});
 
 app.post("/", async (req, res) => {
   console.log("body ", req);
