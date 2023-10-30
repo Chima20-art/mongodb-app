@@ -21,8 +21,6 @@ const db = mongoose.connection;
 
 const UserConsent = require("../models/UserConsent");
 
-app.use(app.json());
-
 app.get("/", (req, res) => {
   res.send("Welcome to my MongoDB app!");
 });
