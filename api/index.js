@@ -9,13 +9,19 @@ app.get("/api", (req, res) => {
   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
 });
 
-db.on("error", (err) => {
-  console.error("MongoDB connection error:", err);
+const dbURI =
+  "mongodb+srv://michichchaimae:UF6y2g9SyFQmSqAr@cluster0.eghaojt.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-db.once("open", () => {
-  console.log("Connected to MongoDB");
-});
+const db = mongoose.connection;
+
+const UserConsent = require("./models/UserConsent");
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Welcome to my MongoDB app!");
