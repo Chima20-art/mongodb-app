@@ -1,6 +1,5 @@
 const app = require("express")();
 const { v4 } = require("uuid");
-const UserConsent = require("../models/UserConsent");
 
 app.get("/api", (req, res) => {
   const path = `/api/item/${v4()}`;
