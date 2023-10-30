@@ -19,7 +19,7 @@ mongoose.connect(dbURI, {
 
 const db = mongoose.connection;
 
-const UserConsent = require("./models/UserConsent");
+const UserConsent = require("../models/UserConsent");
 
 app.use(express.json());
 
