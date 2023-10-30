@@ -3,6 +3,13 @@ const express = require("express");
 
 const { v4 } = require("uuid");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const corsOptions = {
+  origin: "https://mongodb-app-6rhb-9nfcpcobu-chima20-art.vercel.app",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
