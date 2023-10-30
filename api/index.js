@@ -34,7 +34,7 @@ app.get("/api/getAll", async (req, res) => {
   }
 });
 
-app.post("/addLog", async (req, res) => {
+app.post("/api/addLog", async (req, res) => {
   console.log("body ", req);
 
   try {
