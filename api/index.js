@@ -5,7 +5,8 @@ const { v4 } = require("uuid");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const corsOptions = {
-  origin: "https://mongodb-app-6rhb-9nfcpcobu-chima20-art.vercel.app",
+  origin:
+    "https://mongodb-app-6rhb-9nfcpcobu-chima20-art.vercel.app/api/getAll",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
