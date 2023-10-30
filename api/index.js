@@ -25,7 +25,7 @@ app.get("/api", (req, res) => {
   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
 });
 
-app.get("/getAll", async (req, res) => {
+app.get("/api/getAll", async (req, res) => {
   try {
     const data = await UserConsent.find();
     return res.end(JSON.stringify(data));
