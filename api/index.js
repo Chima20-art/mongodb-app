@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 app.get("/getAll", async (req, res) => {
   try {
     const data = await UserConsent.find();
-    res.json(data);
+    res.end(JSON.stringify(data));
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
