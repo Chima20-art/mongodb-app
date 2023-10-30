@@ -28,7 +28,7 @@ app.get("/api", (req, res) => {
 app.get("/api/getAll", async (req, res) => {
   try {
     const data = await UserConsent.find();
-    return res.end(JSON.stringify(data));
+    return res.json(data);
   } catch (error) {
     return res.end({ message: error.message });
   }
