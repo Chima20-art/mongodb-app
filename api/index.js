@@ -34,7 +34,7 @@ app.get("/getAll", async (req, res) => {
   }
 });
 
-app.post("/", async (req, res) => {
+app.post("/addLog", async (req, res) => {
   console.log("body ", req);
 
   try {
