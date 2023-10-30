@@ -1,0 +1,664 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.0-rc.16/dist/cookieconsent.css"
+/>
+<script src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.0-rc.16/dist/cookieconsent.umd.js"></script>
+<script>
+  function logConsent() {
+    // Retrieve all the fields
+    const cookie = CookieConsent.getCookie();
+    const preferences = CookieConsent.getUserPreferences();
+
+    // In this example we're saving only 4 fields
+    const userConsent = {
+      consentId: cookie.consentId,
+      acceptType: preferences.acceptType,
+      acceptedCategories: preferences.acceptedCategories,
+      rejectedCategories: preferences.rejectedCategories,
+    };
+    console.log("userConsent", userConsent);
+
+    // Send the data to your backend
+    // replace "/your-endpoint-url" with your API
+    fetch(
+      "https://mongodb-app-6rhb-9nfcpcobu-chima20-art.vercel.app/api/addLog",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userConsent),
+      }
+    );
+  }
+</script>
+
+<script>
+  window.addEventListener("load", function () {
+    CookieConsent.run({
+      // your config. goes here (required)
+      onFirstConsent: () => {
+        logConsent();
+      },
+
+      onChange: () => {
+        logConsent();
+      },
+      autoClearCookies: true,
+      manageScriptTags: true,
+      categories: {
+        necessary: {
+          enabled: true, // this category is enabled by default
+          readOnly: true, // this category cannot be disabled
+        },
+        analytics: {
+          autoClear: {
+            cookies: [
+              {
+                name: "SSID", // regex: match all cookies starting with '_ga'
+                domain: "google.com",
+              },
+              {
+                name: "APISID", // regex: match all cookies starting with '_ga'
+                domain: "google.com.tr",
+              },
+              {
+                name: "__RequestVerificationToken", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "CultureSettings", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "ticimax_PopupSettings", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "__cf_bm", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "_fbp", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: ".TicimaxAuthModule", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "TcmxSID", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "Ticimax_Cart_SessionID", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "Ticimax_Member_Data", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: "_cfuvid", // regex: match all cookies starting with '_ga'
+                domain: "cagri.ticimaxtest.com",
+              },
+              {
+                name: /^_ga/,
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: /^_hj/,
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "_fbp",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "__cf_bm",
+                domain: "ticimaxtest.com",
+              },
+
+              {
+                name: "_gat_gtag_UA_108222877_2",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "_ga_CTFLVW116C",
+                domain: "ticimaxtest.com",
+              },
+
+              {
+                name: "CultureSettings",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "TicimaxReferer",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "ticimax_PopupSettings",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "magazaBolgeSecimi",
+                domain: "ticimaxtest.com",
+              },
+
+              {
+                name: "AEC",
+                domain: "google.com",
+              },
+              {
+                name: "_ga_76KM52YPKS",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "_ga",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "_gid",
+                domain: "ticimaxtest.com",
+              },
+            ],
+          },
+        },
+        marketing: {
+          autoClear: {
+            cookies: [
+              {
+                name: "test_Kullanılan Çerez",
+                domain: ".doubleclick.net",
+              },
+              {
+                name: "_fbp",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "_gcl_au",
+                domain: "ticimaxtest.com",
+              },
+              {
+                name: "ADS_VISITOR_ID",
+                domain: "ticimaxtest.com",
+              },
+            ],
+          },
+        },
+      },
+      language: {
+        default: "tr",
+        translations: {
+          en: {
+            consentModal: {
+              title: "We use cookies",
+              description:
+                "Cookie modal description  <a href='https://www.w3schools.com'><b>Bunların</b></a>",
+              acceptAllBtn: "Accept all",
+              acceptNecessaryBtn: "Reject all",
+              showPreferencesBtn: "Manage Individual preferences",
+            },
+            preferencesModal: {
+              title: "Manage cookie preferences",
+              acceptAllBtn: "Accept all",
+              acceptNecessaryBtn: "Reject all",
+              savePreferencesBtn: "Accept current selection",
+              closeIconLabel: "Close modal",
+              sections: [
+                {
+                  title: "Somebody said ... cookies?",
+                  description: "I want one!",
+                },
+                {
+                  title: "Strictly Necessary cookies",
+                  description:
+                    "These cookies are essential for the proper functioning of the website and cannot be disabled.",
+
+                  //this field will generate a toggle linked to the 'necessary' category
+                  linkedCategory: "necessary",
+                },
+                {
+                  title: "Performance and Analytics",
+                  description:
+                    "These cookies collect information about how you use our website. All of the data is anonymized and cannot be used to identify you.",
+                  linkedCategory: "analytics",
+                  cookieTable: {
+                    caption: "Cookie table",
+                    headers: {
+                      name: "Cookie",
+                      domain: "Domain",
+                      desc: "Description",
+                    },
+                    body: [
+                      {
+                        name: "_ga",
+                        domain: location.hostname,
+                        desc: "Description 1",
+                      },
+                      {
+                        name: "_hj",
+                        domain: location.hostname,
+                        desc: "Description 1",
+                      },
+                      {
+                        name: "_gid",
+                        domain: location.hostname,
+                        desc: "Description 2",
+                      },
+                      {
+                        name: "_hjFirstSeen",
+                        domain: location.hostname,
+                        desc: "Description 2",
+                      },
+                      {
+                        name: "__cf_bm",
+                        domain: location.hostname,
+                        desc: "Description 2",
+                      },
+                    ],
+                  },
+                },
+                {
+                  title: "Ads",
+                  description:
+                    "These cookies are used to show you ads that are relevant to you.",
+                  linkedCategory: "marketing",
+                },
+                {
+                  title: "More information",
+                  description:
+                    'For any queries in relation to my policy on cookies and your choices, please <a href="#contact-page">contact us</a>',
+                },
+              ],
+            },
+          },
+          tr: {
+            consentModal: {
+              title: "Çerez Yönetimi",
+              description:
+                "Alışveriş deneyiminizi iyileştirmek için yasal düzenlemeye uygun olarak çerezler kullanıyoruz. Bunların bir kısmı web sitemizin işlerliği için gerekli olan zorunlu çerezler iken, bir kısmı da site performans analiz ve istatistikleri, girişlerinizde sizi tanıyabilmemiz ve içerik, reklam gibi alanları size özel kişiselleştirebilmemiz amaçlarıyla kullanılan çerezlerdir. Detaylı bilgi için <a href='https://www.cagri.com/kisisel-verilerin-korunmasi'> <b>Çerez (Cookie) Aydınlatma Metnimizi</b></a>  inceleyebilirsiniz ve Çerez Ayarları ile çerez tercihlerinizi belirleyebilirsiniz.",
+              acceptAllBtn: "Tümünü Kabul Et",
+              acceptNecessaryBtn: "Tümünü Reddet",
+              showPreferencesBtn: "Çerez ayarları",
+            },
+            preferencesModal: {
+              title: "Çerez tercihlerini yönetin",
+              acceptAllBtn: "Tümünü Kabul Et",
+              acceptNecessaryBtn: "Tümünü Reddet",
+              savePreferencesBtn: "Mevcut seçimi kabul et",
+              closeIconLabel: "Modeli kapat",
+              sections: [
+                {
+                  title: "Çerez Yönetimi",
+                  description:
+                    "Alışveriş deneyiminizi iyileştirmek için yasal düzenlemeye uygun olarak çerezler kullanıyoruz. Bunların bir kısmı web sitemizin işlerliği için gerekli olan zorunlu çerezler iken, bir kısmı da site performans analiz ve istatistikleri, girişlerinizde sizi tanıyabilmemiz ve içerik, reklam gibi alanları size özel kişiselleştirebilmemiz amaçlarıyla kullanılan çerezlerdir. Detaylı bilgi için <a href='https://www.cagri.com/kisisel-verilerin-korunmasi'> <b>Çerez (Cookie) Aydınlatma Metnimizi</b></a>  inceleyebilirsiniz ve Çerez Ayarları ile çerez tercihlerinizi belirleyebilirsiniz.",
+                },
+                {
+                  title: "Kesinlikle Gerekli Çerezler", //necessary cookies
+                  description:
+                    "Bu çerezler web sitesinin düzgün çalışması için gereklidir ve devre dışı bırakılamaz.",
+                  linkedCategory: "necessary", //this field will generate a toggle linked to the 'necessary' category
+                  cookieTable: {
+                    caption: "Çerez tablosu",
+                    headers: {
+                      name: "Kullanılan Çerez",
+                      domain: "Sağlayıcı",
+                      desc: "Açıklama ve Tercihler",
+                      expirydate: "Kullanım Süresi",
+                    },
+                    body: [
+                      {
+                        name: "cc_cookie",
+                        domain: location.hostname,
+                        desc: "Çerez tercihleri kontrol etmek amaçlı kullanılır.",
+                        expirydate: "1 Saat",
+                      },
+                      {
+                        name: "__cf_bm",
+                        domain: location.hostname,
+                        desc: "Kullanıcı ve botlar arasında ayrım yapmak için kullanılır",
+                        expirydate: "1 Saat",
+                      },
+                      {
+                        name: "_cfuvid",
+                        domain: location.hostname,
+                        desc: "Güvenli ağ trafiğini yönetmektedir.",
+                        expirydate: "Oturum Çerezi",
+                      },
+                      {
+                        name: "__RequestVerificationToken",
+                        domain: location.hostname,
+                        desc: "Web uygulamaları tarafından yetkisiz içerik gönderilmesini engelleyen bir çerezdir.",
+                        expirydate: "Oturum Çerezi	",
+                      },
+                      {
+                        name: "SERVERID",
+                        domain: location.hostname,
+                        desc: "Ticimaxta bulunan Server ID'sini belirmektedir.",
+                        expirydate: "Oturum Çerezi",
+                      },
+                    ],
+                  },
+                },
+                {
+                  title: "Performans ve Analitik",
+                  description:
+                    "Bu çerezler web sitemizi nasıl kullandığınız hakkında bilgi toplar. Tüm veriler anonimleştirilmiştir ve kimliğinizin belirlenmesi için kullanılamaz.",
+                  linkedCategory: "analytics", //linked category
+                  cookieTable: {
+                    caption: "Çerez tablosu",
+                    headers: {
+                      name: "Kullanılan Çerez",
+                      domain: "Sağlayıcı",
+                      desc: "Açıklama ve Tercihler",
+                      expirydate: "Kullanım Süresi",
+                    },
+                    body: [
+                      {
+                        name: "personaclick_Oturum",
+                        domain: location.hostname,
+                        desc: "cagri.com da oturum açan Kullanıcılar’ı ayırt etmeye yarayan bir çerezdir.",
+                        expirydate: "Oturum Çerezi ",
+                      },
+
+                      {
+                        name: "personaclick_Oturum Çerezi_code",
+                        domain: location.hostname,
+                        desc: "PersonaClick veritabanındaki benzersiz kullanıcı oturumu kimliği",
+                        expirydate: "Oturum Çerezi ",
+                      },
+
+                      {
+                        name: "personaclick_Oturum Çerezi_last_act",
+                        domain: location.hostname,
+                        desc: "Benzersiz kullanıcı oturumu kimliğinin son kontrolünün zaman damgası",
+                        expirydate: "2 Saat	",
+                      },
+                      {
+                        name: "_personaclick_device_id",
+                        domain: location.hostname,
+                        desc: "PersonaClick database'in de yer alan unique(benzersiz)  devide_ID bilgisidir. Rasgene atanır		",
+                        expirydate: "365 Gün ",
+                      },
+                      {
+                        name: "personaclick_lazy_recommenders",
+                        domain: location.hostname,
+                        desc: "Lazy load recommendation fonksiyonunun devreye geçmesi için olan cookie'dir.",
+                        expirydate: "Oturum Çerezi ",
+                      },
+                      {
+                        name: "personaclick-popup-135",
+                        domain: location.hostname,
+                        desc: " Pop-up'in görünüp görünmediğini takip eden cookie'dir.	",
+                        expirydate: "Oturum Çerezi ",
+                      },
+                      {
+                        name: "_gid",
+                        domain: location.hostname,
+                        desc: "cagri.com da oturum açan Kullanıcılar’ı ayırt etmeye yarayan bir çerezdir.",
+                        expirydate: "0 Saat	 ",
+                      },
+                      {
+                        name: "_ga",
+                        domain: location.hostname,
+                        desc: "A/B test'lerde kullanıcıları 2'ye ayırmak için kullanılan cookie'dir.",
+                        expirydate: "Oturum Çerezi ",
+                      },
+                      {
+                        name: "_ga_",
+                        domain: location.hostname,
+                        desc: "Oturum durumunu korumak için kullanılır.",
+                        expirydate: "Oturum Çerezi",
+                      },
+                      {
+                        name: "AEC",
+                        domain: "google.com",
+                        desc: " Sorguların başka siteler tarafından değil, kullanıcı tarafından yapıldığını garantiler. Bu çerez herhangi bir sitenin kullanıcı adına hareket etmesini önlemek için kullanılır.	",
+                        expirydate: "6 ay",
+                      },
+                      {
+                        name: "_gat",
+                        domain: location.hostname,
+                        desc: "cagri.com’un ziyaret yoğunluğunun arttığı zamanlarda kullanıcının talep oranının sınırlandırması için kullanılır.",
+                        expirydate: "Oturum Çerezi",
+                      },
+                      {
+                        name: "SID,HSID",
+                        domain: location.hostname,
+                        desc: "Kullanıcıya ait Google hesap ID’sinin ve en son giriş yaptığı tarihin dijital olarak imzalanmış ve şifrelenmiş kayıtlarıdır.",
+                        expirydate: "1 yıl 35 gün",
+                      },
+
+                      {
+                        name: "SEARCH_SAMESITE",
+                        domain: location.hostname,
+                        desc: "Siteler arası çerez paylaşımını engeller.",
+                        expirydate: "5 ay 7 gün",
+                      },
+                      {
+                        name: " OTZ",
+                        domain: location.hostname,
+                        desc: "Daha doğru reklam gösterebilmek adına diğer cihazlarındaki aktivitelerinin bağlantısını kurar.",
+                        expirydate: "24 Gün",
+                      },
+                      {
+                        name: "SEARCH_SAMESITE",
+                        domain: "google.com",
+                        desc: "Siteler arası çerez paylaşımını engeller.",
+                        expirydate: "5 ay 7 gün",
+                      },
+                      {
+                        name: "HSID, SID",
+                        domain: "google.com",
+                        desc: "Kullanıcıya ait Google hesap ID’sinin ve en son giriş yaptığı tarihin dijital olarak imzalanmış ve şifrelenmiş kayıtlarıdır.",
+                        expirydate: "1 yıl 35 gün",
+                      },
+                      {
+                        name: "DV",
+                        domain: "google.com",
+                        desc: "DTercih edilen dil, aramada çıkan sonuç sayısı gibi kullanıcı bilgilerini ve tercihlerini tutar.	",
+                        expirydate: "	7 dakika",
+                      },
+
+                      {
+                        name: "HSID, SID",
+                        domain: "google.com",
+                        desc: "Kullanıcıya ait Google hesap ID’sinin ve en son giriş yaptığı tarihin dijital olarak imzalanmış ve şifrelenmiş kayıtlarıdır.				",
+                        expirydate: "1 yıl 35 gün",
+                      },
+                      {
+                        name: "DV",
+                        domain: "google.com",
+                        desc: "DTercih edilen dil, aramada çıkan sonuç sayısı gibi kullanıcı bilgilerini ve tercihlerini tutar.	",
+                        expirydate: "	7 dakika",
+                      },
+                    ],
+                  },
+                },
+                {
+                  title: "Marketing", //marketing
+                  description:
+                    "Bu çerezler, reklamverenlerin hedef müşterilerinin profilini benzeri görülmemiş bir doğrulukla çıkarmasına olanak tanır",
+                  linkedCategory: "marketing",
+                  cookieTable: {
+                    caption: "Çerez tablosu",
+                    headers: {
+                      name: "Kullanılan Çerez",
+                      domain: "Sağlayıcı",
+                      desc: "Açıklama ve Tercihler",
+                      expirydate: "Kullanım Süresi",
+                    },
+                    body: [
+                      {
+                        name: "test_Kullanılan Çerez",
+                        domain: ".doubleclick.net",
+                        desc: "Kullanıcının tarayıcısının çerezleri destekleyip desteklemediğini belirlemektir.",
+                        expirydate: "0 Saat	 ",
+                      },
+                      {
+                        name: "_fbp",
+                        domain: location.hostname,
+                        desc: " Meta tarafından üçüncü taraf reklam verenlerden gerçek zamanlı teklif verme gibi bir dizi reklam ürünü sunmak amacıyla kullanılmaktadır.",
+                        expirydate: "90 Gün",
+                      },
+                      {
+                        name: "_gcl_au",
+                        domain: location.hostname,
+                        desc: "Web siteleri arası reklam verimliliği için yapılan testler için kullanılır.",
+                        expirydate: "Oturum Çerezi	",
+                      },
+                      {
+                        name: "ADS_VISITOR_ID",
+                        domain: location.hostname,
+                        desc: "LinkedIn’in “ADS_VISITOR_ID” çerezi, ilgili reklamları göstermek için bir web sitesini ziyaret eden kullanıcılar hakkında bilgi toplamaktadır.",
+                        expirydate: "1 yıl 35 gün",
+                      },
+                      {
+                        name: "HSID",
+                        domain: "google.com	",
+                        desc: "Kullanıcıya ait Google hesap ID’sinin ve en son giriş yaptığı tarihin dijital olarak imzalanmış ve şifrelenmiş kayıtlarıdır.",
+                        expirydate: "1 yıl 35 gün",
+                      },
+                      {
+                        name: "SSID, SAPISID,APISID, SIDCC, SAPISID",
+                        domain: "google.com",
+                        desc: "Google Ads optimizasyonu için kullanılır.	",
+                        expirydate: "1 yıl 35 gün",
+                      },
+                      {
+                        name: "  NID",
+                        domain: " google.com",
+                        desc: "Oturumu kapalı kullanıcıların son aramalara ve etkileşimlere dayanarak kullanıcının tercihlerini ve kişiselleştirilmiş reklamları saklar.",
+                        expirydate: "6 ay",
+                      },
+                      {
+                        name: "__Secure-3PSID, __Secure-3PSIDCC, __Secure-1PSIDCC, __Secure-1PSID, __Secure-1PAPISID, __Secure-3PAPISID, __Secure-1PSIDTS, __Secure-3PSIDTS, __Secure-ENID",
+                        domain: "google.com",
+                        desc: "Kullanıcı ilgilerinden bir profil yaratmak ve kişiselleştirilmiş reklam gösterimi için tutulur.",
+                        expirydate: "1 yıl 35 gün",
+                      },
+                    ],
+                  },
+                },
+                {
+                  title: "Daha fazla bilgi", //More information
+                  description:
+                    "Çerezlere ve tercihlerinize ilişkin politikamla ilgili sorularınız için lütfen <b>bize ulaşın</b>",
+                },
+              ],
+            },
+          },
+        },
+      },
+    });
+    // check if cookieconsent is present
+  });
+</script>
+
+<script>
+  window.addEventListener(
+    "load",
+    function () {
+      // check if cookieconsent is present
+      // let categories = CookieConsent.getCookie("categories");
+      // console.log("cookie categories ", categories);
+      // CookieConsent.acceptCategory(categories);
+      // if (!CookieConsent.acceptedCategory("analytics")) {
+      //   console.log(
+      //     "number of cookies before removal ",
+      //     document.cookie.split(";").length
+      //   );
+      //   CookieConsent.eraseCookies(
+      //     [
+      //       "_gid",
+      //       /^_ga/,
+      //       /^_hj/,
+      //       "_fbp",
+      //       "__cf_bm",
+      //       "_ga",
+      //       "_gat_gtag_UA_108222877_2",
+      //       "_ga_CTFLVW116C",
+      //       "_ga",
+      //       "_gcl_au",
+      //       "CultureSettings",
+      //       "ticimax_PopupSettings",
+      //       "magazaBolgeSecimi",
+      //       "_fbp",
+      //     ],
+      //     "/",
+      //     "ticimaxtest.com"
+      //   );
+      //   CookieConsent.eraseCookies(
+      //     [
+      //       "__RequestVerificationToken",
+      //       "CultureSettings",
+      //       "ticimax_PopupSettings",
+      //       "__cf_bm",
+      //       "_fbp",
+      //       ".TicimaxAuthModule",
+      //       "TcmxSID",
+      //       "Ticimax_Cart_SessionID",
+      //       "Ticimax_Member_Data",
+      //       "_cfuvid",
+      //     ],
+      //     "/",
+      //     "cagri.ticimaxtest.com"
+      //   );
+      //   CookieConsent.eraseCookies(["AEC", "SSID"], "/", "google.com");
+      //   CookieConsent.eraseCookies("APISID", "/", "google.com.tr");
+      //   console.log(
+      //     "number of cookies after removal ",
+      //     document.cookie.split(";").length
+      //   );
+    }
+
+    // if (!CookieConsent.acceptedCategory("ads")) {
+    //   console.log(
+    //     "number of cookies before removal ",
+    //     document.cookie.split(";").length
+    //   );
+    //   CookieConsent.eraseCookies(["TicimaxReferer"], "/", "ticimaxtest.com");
+    // }
+  );
+</script>
+
+<script
+  type="text/plain"
+  data-category="analytics"
+  data-service="Facebook Pixel"
+>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2306932692718116');
+  fbq('track', 'PageView');
+</script>
+<noscript
+  ><img
+    height="1"
+    width="1"
+    style="display: none"
+    src="https://www.facebook.com/tr?id=2306932692718116&ev=PageView&noscript=1"
+/></noscript>
+
+<script
+  type="text/plain"
+  data-category="analytics"
+  data-service="Google Analytics"
+>
+
+  (function (i, s, o, g, r, a, m) {
+                                      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                                          (i[r].q = i[r].q || []).push(arguments)
+                                      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                                      m = s.getElementsByTagName(o)[0]; a.setAttribute('ticimax', 'true'); a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                                  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');ga('create', 'UA-39357144-3', 'cagri.com', { 'userId': '101822' });ga('require', 'displayfeatures');
+                                ga('require', 'ec');
+                                ga('set', '&cu', 'try');
+</script>
