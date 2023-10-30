@@ -1,4 +1,6 @@
 const app = require("express")();
+const express = require("express");
+
 const { v4 } = require("uuid");
 const mongoose = require("mongoose");
 
@@ -21,7 +23,7 @@ const db = mongoose.connection;
 
 const UserConsent = require("../models/UserConsent");
 
-app.use(app.json());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Welcome to my MongoDB app!");
