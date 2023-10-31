@@ -21,6 +21,7 @@ mongoose.connect(dbURI, {
   useUnifiedTopology: true,
 });
 
+console.log("Tao is right");
 const db = mongoose.connection;
 
 const UserConsent = require("../models/UserConsent");
@@ -47,6 +48,7 @@ app.post("/api/addLog", async (req, res) => {
 
   try {
     const data = new UserConsent({
+      date: Date.now(),
       consentId: req?.body?.consentId,
       acceptType: req.body.acceptType,
       acceptedCategories: req.body.acceptedCategories,
@@ -58,6 +60,45 @@ app.post("/api/addLog", async (req, res) => {
     console.log(error);
     res.status(400).json({ message: error.message });
   }
+});
+
+app.post("/api/login", async (req, res) => {
+  console.log("body ", req);
+
+  let users = [
+    {
+      email: "a@b.com",
+      password: "12345678",
+    },
+  ];
+
+  try {
+    let email = req?.body?.email;
+    let password = req?.body?.email;
+    if (email && password) {
+      let users = users.filter(
+        (item) => item.email == email && item.password == password
+      );
+      if (users?.length > 0) {
+        return res.status(200).json({
+          status: true,
+        });
+      }
+    } else {
+      res
+        .status(400)
+        .json({ status: false, message: "email and password are required" });
+    }
+
+    return res.status(200).json(dataToSave);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+app.listen(3003, function () {
+  console.log("Server is listening on port 3003...");
 });
 
 module.exports = app;

@@ -20,16 +20,13 @@
 
     // Send the data to your backend
     // replace "/your-endpoint-url" with your API
-    fetch(
-      "https://mongodb-app-6rhb-9nfcpcobu-chima20-art.vercel.app/api/addLog",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userConsent),
-      }
-    );
+    fetch("https://cagriapi.vercel.app/api/addLog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userConsent),
+    });
   }
 </script>
 
