@@ -49,8 +49,7 @@ app.get("/api", (req, res) => {
 
 app.all("/api/getAll", cors({ origin: "*" }), async (req, res) => {
   if (req.method === "OPTIONS") {
-    res.status(200).end();
-    return;
+    return res.status(200).end();
   }
 
   try {
