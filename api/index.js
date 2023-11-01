@@ -46,9 +46,12 @@ app.get("/api/getAll", async (req, res) => {
 app.post("/api/addLog", async (req, res) => {
   console.log("body ", req);
 
+  let ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
   try {
     const data = new UserConsent({
       date: Date.now(),
+      ip: ip,
       consentId: req?.body?.consentId,
       acceptType: req.body.acceptType,
       acceptedCategories: req.body.acceptedCategories,
