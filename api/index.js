@@ -134,7 +134,7 @@ app.post("/api/login", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 });
 
