@@ -43,6 +43,10 @@ app.options("/api/getAll", async (req, res) => {
   return res.status(200).end();
 });
 
+app.options("/api/addLog", async (req, res) => {
+  return res.status(200).end();
+});
+
 app.get("/api/getAll", async (req, res) => {
   try {
     res.setHeader("Access-Control-Allow-Credentials", true);
