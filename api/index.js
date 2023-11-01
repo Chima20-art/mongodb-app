@@ -42,9 +42,6 @@ app.get("/api", (req, res) => {
 app.options("/api/getAll", async (req, res) => {
   return res.status(200).end();
 });
-app.options("/api/login", async (req, res) => {
-  return res.status(200).end();
-});
 
 app.get("/api/getAll", async (req, res) => {
   try {
