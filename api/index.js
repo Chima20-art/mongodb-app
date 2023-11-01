@@ -96,49 +96,60 @@ app.post("/api/addLog", async (req, res) => {
   }
 });
 
-app.post(
-  "/api/login",
-  allowCors(async (req, res) => {
-    let users = [
-      {
-        email: "a@b.com",
-        password: "12345678",
-      },
-    ];
+app.all("/api/login", async (req, res) => {
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
 
-    try {
-      let email = req?.body?.email;
-      let password = req?.body?.email;
-      if (email && password) {
-        let user = users.filter(
-          (item) => item.email == email && item.password == password
-        );
-        if (user?.length > 0) {
-          return res.status(200).json({
-            status: true,
-          });
-        } else {
-          return res.status(401).json({
-            status: false,
-            message: "User not found",
-            email,
-            password,
-          });
-        }
-      } else {
-        return res.status(501).json({
-          status: false,
-          message: "email and password are required",
-          email,
-          password,
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
+
+  let users = [
+    {
+      email: "a@b.com",
+      password: "12345678",
+    },
+  ];
+
+  try {
+    let email = req?.body?.email;
+    let password = req?.body?.email;
+    if (email && password) {
+      let user = users.filter(
+        (item) => item.email == email && item.password == password
+      );
+      if (user?.length > 0) {
+        return res.status(200).json({
+          status: true,
         });
+      } else {
+        return res
+          .status(401)
+          .json({ status: false, message: "User not found", email, password });
       }
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: error.message });
+    } else {
+      return res.status(501).json({
+        status: false,
+        message: "email and password are required",
+        email,
+        password,
+      });
     }
-  })
-);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+});
 
 //app.use(cors({ origin: ["localhost:3000"] }));
 
