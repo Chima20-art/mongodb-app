@@ -4,14 +4,14 @@ require("dotenv").config();
 
 const { v4 } = require("uuid");
 const mongoose = require("mongoose");
-const cors = require("cors");
+// const cors = require("cors");
 
-const corsOptions = {
-  origin: ["localhost:3000"],
+// const corsOptions = {
+//   origin: ["localhost:3000"],
 
-  //credentials: true, //access-control-allow-credentials:true
-  //optionSuccessStatus: 200,
-};
+//   //credentials: true, //access-control-allow-credentials:true
+//   //optionSuccessStatus: 200,
+// };
 
 app.use(express.json());
 
@@ -39,8 +39,25 @@ app.get("/api", (req, res) => {
   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
 });
 
+app.options("/api/getAll", async (req, res) => {
+  return res.status(200).end();
+});
+
 app.get("/api/getAll", async (req, res) => {
   try {
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+    );
+
     const data = await UserConsent.find();
 
     return res.json(data);
@@ -106,7 +123,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.use(cors({ origin: ["localhost:3000"] }));
+//app.use(cors({ origin: ["localhost:3000"] }));
 
 app.listen(3003, function () {
   console.log("Server is listening on port 3003...");
