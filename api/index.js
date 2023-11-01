@@ -136,11 +136,11 @@ app.all("/api/login", async (req, res) => {
         });
       } else {
         return res
-          .status(401)
+          .status(200)
           .json({ status: false, message: "User not found", email, password });
       }
     } else {
-      return res.status(501).json({
+      return res.status(200).json({
         status: false,
         message: "email and password are required",
         email,
