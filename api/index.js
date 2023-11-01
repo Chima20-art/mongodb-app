@@ -96,7 +96,7 @@ app.post("/api/addLog", async (req, res) => {
   }
 });
 
-app.post("/api/login", cors({ origin: "*" }), async (req, res) => {
+app.post("/api/login", async (req, res) => {
   let users = [
     {
       email: "a@b.com",
