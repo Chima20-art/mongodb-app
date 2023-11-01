@@ -106,7 +106,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.use(cors(corsOptions));
+app.use(cors({ origin: ["localhost:3000"] }));
 
 app.listen(3003, function () {
   console.log("Server is listening on port 3003...");
