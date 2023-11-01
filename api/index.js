@@ -133,7 +133,7 @@ app.post("/api/login", async (req, res) => {
       },
     ];
     let email = req?.body?.email;
-    let password = req?.body?.email;
+    let password = req?.body?.password;
     if (email && password) {
       let user = users.filter(
         (item) => item.email == email && item.password == password
