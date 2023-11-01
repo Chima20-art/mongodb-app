@@ -47,20 +47,25 @@ app.get("/api", (req, res) => {
 //   return res.status(200).end();
 // });
 
-app.get("/api/getAll", cors({ origin: "*" }), async (req, res) => {
+app.all("/api/getAll", cors({ origin: "*" }), async (req, res) => {
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
+
   try {
-    // res.setHeader("Access-Control-Allow-Credentials", true);
-    // res.setHeader("Access-Control-Allow-Origin", "*");
-    // // another common pattern
-    // // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-    // res.setHeader(
-    //   "Access-Control-Allow-Methods",
-    //   "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-    // );
-    // res.setHeader(
-    //   "Access-Control-Allow-Headers",
-    //   "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-    // );
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+    );
 
     const data = await UserConsent.find();
 
