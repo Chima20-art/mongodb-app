@@ -41,8 +41,6 @@ app.get("/api", (req, res) => {
 app.get("/api/getAll", async (req, res) => {
   try {
     const data = await UserConsent.find();
-    res.setHeader("Access-Control-Allow-Origin", req.get("origin"));
-    res.setHeader("Access-Control-Allow-Credentials", "true");
 
     return res.json(data);
   } catch (error) {
