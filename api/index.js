@@ -29,15 +29,15 @@ const UserConsent = require("../models/UserConsent");
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", req.hostname);
 //   //    res.setHeader("Access-Control-Allow-Credentials", "true");
-api /
-  //   next();
-  // });
+// api /
+//   next();
+// });
 
-  app.get("/api", (req, res) => {
-    const path = `/api/item/${v4()}`;
+app.get("/api", (req, res) => {
+  const path = `/api/item/${v4()}`;
 
-    res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-  });
+  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+});
 
 app.options("/api/getAll", async (req, res) => {
   return res.status(200).end();
