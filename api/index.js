@@ -27,18 +27,14 @@ const db = mongoose.connection;
 
 const UserConsent = require("../models/UserConsent");
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", req.hostname);
+  next();
+});
+
 app.get("/api", (req, res) => {
   const path = `/api/item/${v4()}`;
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Max-Age", "1800");
-  res.setHeader("Access-Control-Allow-Headers", "content-type");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "PUT, POST, GET, DELETE, PATCH, OPTIONS"
-  );
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
 });
 
