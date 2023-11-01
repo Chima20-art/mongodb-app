@@ -130,7 +130,12 @@ app.post("/api/login", async (req, res) => {
     } else {
       return res
         .status(400)
-        .json({ status: false, message: "email and password are required" });
+        .json({
+          status: false,
+          message: "email and password are required",
+          email,
+          password,
+        });
     }
   } catch (error) {
     console.log(error);
