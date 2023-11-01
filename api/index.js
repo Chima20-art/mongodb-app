@@ -98,7 +98,7 @@ app.post("/api/addLog", async (req, res) => {
 
 app.options("/api/login", cors()); // Enable CORS pre-flight request for this route
 
-app.all("/api/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   console.log("api/login called");
   try {
     if (req.method === "OPTIONS") {
@@ -149,7 +149,7 @@ app.all("/api/login", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: error.message });
+    return res.status(200).json({ message: error.message });
   }
 });
 
