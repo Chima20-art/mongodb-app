@@ -42,9 +42,9 @@ app.get("/api", (req, res) => {
 app.options("/api/getAll", async (req, res) => {
   return res.status(200).end();
 });
-// app.options("/api/login", async (req, res) => {
-//   return res.status(200).end();
-// });
+app.options("/api/login", async (req, res) => {
+  return res.status(200).end();
+});
 
 app.get("/api/getAll", async (req, res) => {
   try {
@@ -92,7 +92,6 @@ app.post("/api/addLog", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  console.log("body ", req);
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -128,7 +127,7 @@ app.post("/api/login", async (req, res) => {
           .json({ status: false, message: "User not found", email, password });
       }
     } else {
-      return res.status(400).json({
+      return res.status(501).json({
         status: false,
         message: "email and password are required",
         email,
