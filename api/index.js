@@ -39,13 +39,13 @@ app.get("/api", (req, res) => {
   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
 });
 
-app.options("/api/getAll", async (req, res) => {
-  return res.status(200).end();
-});
+// app.options("/api/getAll", async (req, res) => {
+//   return res.status(200).end();
+// });
 
-app.options("/api/addLog", async (req, res) => {
-  return res.status(200).end();
-});
+// app.options("/api/addLog", async (req, res) => {
+//   return res.status(200).end();
+// });
 
 app.get("/api/getAll", cors({ origin: "*" }), async (req, res) => {
   try {
