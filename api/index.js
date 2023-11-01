@@ -5,8 +5,10 @@ require("dotenv").config();
 const { v4 } = require("uuid");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
 const corsOptions = {
   origin: "*",
+  credentials: true,
   //credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
