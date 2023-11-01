@@ -97,6 +97,7 @@ app.post("/api/addLog", async (req, res) => {
 });
 
 app.all("/api/login", async (req, res) => {
+  console.log("api/login called");
   try {
     if (req.method === "OPTIONS") {
       return res.status(200).end();
