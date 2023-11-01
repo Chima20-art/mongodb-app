@@ -68,9 +68,9 @@ app.all("/api/getAll", cors({ origin: "*" }), async (req, res) => {
 
     const data = await UserConsent.find();
 
-    return res.json(data);
+    return res.status(200).json(data);
   } catch (error) {
-    return res.end({ message: error.message });
+    return res.status(501).end({ message: error.message });
   }
 });
 
