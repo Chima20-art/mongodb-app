@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const { v4 } = require("uuid");
 const mongoose = require("mongoose");
-// const cors = require("cors");
+const cors = require("cors");
 
 // const corsOptions = {
 //   origin: ["localhost:3000"],
@@ -95,6 +95,8 @@ app.post("/api/addLog", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+app.options("/api/login", cors()); // Enable CORS pre-flight request for this route
 
 app.all("/api/login", async (req, res) => {
   console.log("api/login called");
