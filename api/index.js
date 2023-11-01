@@ -1,5 +1,6 @@
 const app = require("express")();
 const express = require("express");
+require("dotenv").config();
 
 const { v4 } = require("uuid");
 const mongoose = require("mongoose");
@@ -13,15 +14,13 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-const dbURI =
-  "mongodb+srv://michichchaimae:UF6y2g9SyFQmSqAr@cluster0.eghaojt.mongodb.net/?retryWrites=true&w=majority";
+const dbURI = process.env.REACT_APP_dbURI;
 
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-console.log("Tao is right");
 const db = mongoose.connection;
 
 const UserConsent = require("../models/UserConsent");
