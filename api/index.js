@@ -4,15 +4,14 @@ require("dotenv").config();
 
 const { v4 } = require("uuid");
 const mongoose = require("mongoose");
-//const cors = require("cors");
+const cors = require("cors");
 
-// const corsOptions = {
-//   origin: "*",
+const corsOptions = {
+  origin: "*",
 
-//   //credentials: true, //access-control-allow-credentials:true
-//   optionSuccessStatus: 200,
-// };
-// app.use(cors(corsOptions));
+  //credentials: true, //access-control-allow-credentials:true
+  //optionSuccessStatus: 200,
+};
 
 app.use(express.json());
 
@@ -27,10 +26,12 @@ const db = mongoose.connection;
 
 const UserConsent = require("../models/UserConsent");
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", req.hostname);
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", req.hostname);
+//   //    res.setHeader("Access-Control-Allow-Credentials", "true");
+
+//   next();
+// });
 
 app.get("/api", (req, res) => {
   const path = `/api/item/${v4()}`;
@@ -104,6 +105,8 @@ app.post("/api/login", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+app.use(cors(corsOptions));
 
 app.listen(3003, function () {
   console.log("Server is listening on port 3003...");
