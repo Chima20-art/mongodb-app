@@ -122,14 +122,16 @@ app.post("/api/login", async (req, res) => {
         return res.status(200).json({
           status: true,
         });
+      } else {
+        return res
+          .status(401)
+          .json({ status: false, message: "User not found" });
       }
     } else {
-      res
+      return res
         .status(400)
         .json({ status: false, message: "email and password are required" });
     }
-
-    return res.status(200).json(dataToSave);
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: error.message });
