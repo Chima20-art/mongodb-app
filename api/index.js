@@ -97,45 +97,34 @@ app.post("/api/addLog", async (req, res) => {
 });
 
 app.options("/api/login", async (req, res) => {
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  // another common pattern
-  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+    "X-Requested-With,content-type"
   );
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
-  return res.status(201).end();
+  // Handle preflight request. When receiving a preflight request (a request with an OPTIONS method), we need to set the content-length to 0, and return a status of 200.
+  return res.status(200).end();
 }); // Enable CORS pre-flight request for this route
 
 app.post("/api/login", async (req, res) => {
   console.log("api/login called");
   try {
-    if (req.method === "OPTIONS") {
-      return res.status(200).end();
-    }
-
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    // another common pattern
-    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.setHeader(
       "Access-Control-Allow-Methods",
       "GET,OPTIONS,PATCH,DELETE,POST,PUT"
     );
     res.setHeader(
       "Access-Control-Allow-Headers",
-      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+      "X-Requested-With,content-type"
     );
+    res.setHeader("Access-Control-Allow-Credentials", true);
 
     let users = [
       {
