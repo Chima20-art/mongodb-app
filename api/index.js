@@ -92,17 +92,6 @@ app.post("/api/addLog", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
-
   let users = [
     {
       email: "a@b.com",
@@ -114,10 +103,10 @@ app.post("/api/login", async (req, res) => {
     let email = req?.body?.email;
     let password = req?.body?.email;
     if (email && password) {
-      let users = users.filter(
+      let user = users.filter(
         (item) => item.email == email && item.password == password
       );
-      if (users?.length > 0) {
+      if (user?.length > 0) {
         return res.status(200).json({
           status: true,
         });
