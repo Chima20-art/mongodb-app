@@ -124,7 +124,7 @@ app.post("/api/addLog", async (req, res) => {
 });
 
 app.options("/api/login", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
@@ -142,7 +142,7 @@ app.options("/api/login", async (req, res) => {
 app.post("/api/login", async (req, res) => {
   console.log("api/login called");
   try {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
       "Access-Control-Allow-Methods",
       "GET,OPTIONS,PATCH,DELETE,POST,PUT"
