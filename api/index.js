@@ -74,8 +74,35 @@ app.all("/api/getAll", async (req, res) => {
   }
 });
 
+app.options("/api/addLog", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
+  // Handle preflight request. When receiving a preflight request (a request with an OPTIONS method), we need to set the content-length to 0, and return a status of 200.
+  return res.status(200).end();
+});
+
 app.post("/api/addLog", async (req, res) => {
   console.log("body ", req);
+
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
   let ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
