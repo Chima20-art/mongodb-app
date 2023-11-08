@@ -66,9 +66,38 @@ app.all("/api/getAll", async (req, res) => {
       "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
     );
 
-    const data = await UserConsent.find();
+    let page = req?.query?.page ? parseInt(req.query.page) : 1;
+    let limit = req?.query?.limit ? parseInt(req.query.limit) : 30;
+    let ip = req.query.ip; // IP value
 
-    return res.status(200).json(data);
+    let NotANUmber = NaN;
+
+    if (isNaN(page) || page < 1) {
+      page = 1;
+    }
+    if (isNaN(limit) || limit < 1 || limit > 1001) {
+      limit = 50;
+    }
+
+    const skipIndex = (page - 1) * limit;
+
+    let query = {};
+    if (ip) {
+      query.ip = { $regex: ip, $options: "i" };
+    }
+
+    const data = await UserConsent.find(query)
+      .sort({ _id: 1 })
+      .limit(limit)
+      .skip(skipIndex)
+      .exec();
+
+    const totalCount = await UserConsent.countDocuments(query);
+
+    return res.status(200).json({
+      data,
+      totalCount,
+    });
   } catch (error) {
     return res.status(501).end({ message: error.message });
   }
