@@ -67,7 +67,7 @@ app.all("/api/getAll", async (req, res) => {
     );
 
     let page = req?.query?.page ? parseInt(req.query.page) : 1;
-    let limit = req?.query?.limit ? parseInt(req.query.limit) : 30;
+    let limit = req?.query?.limit ? parseInt(req.query.limit) : 50;
     let ip = req.query.ip; // IP value
 
     let NotANUmber = NaN;
