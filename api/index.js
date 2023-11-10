@@ -187,6 +187,10 @@ app.post("/api/login", async (req, res) => {
         email: "chaimae@michich.com",
         password: "VIa3+8d2mk3|",
       },
+      {
+        user: "sertacgulce@cagri.com",
+        pass: "36XIna9KT6+",
+      },
     ];
     let email = req?.body?.email;
     let password = req?.body?.password;
