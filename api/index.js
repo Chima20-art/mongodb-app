@@ -87,7 +87,7 @@ app.all("/api/getAll", async (req, res) => {
     }
 
     const data = await UserConsent.find(query)
-      .sort({ _id: 1 })
+      .sort({ _id: -1 })
       .limit(limit)
       .skip(skipIndex)
       .exec();
